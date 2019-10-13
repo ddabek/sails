@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
-import { Row, Col, Button, ButtonGroup, ButtonToolbar, Alert } from 'react-bootstrap';
+import { Row, Col, Button, ButtonToolbar, Alert } from 'react-bootstrap';
+import { copyAddress } from '../../modules/shared.module';
 
 const mapStateToProps = (state) => {
   return {
@@ -17,15 +18,15 @@ class AddressInfo extends Component {
         <Row>
           <Col>
             <ButtonToolbar className="justify-content-end">
-              <Button variant="outline-primary">{this.props.t("copy")}</Button> &nbsp;
+              <Button variant="outline-primary" onClick={()=>{copyAddress(this.props.active_account.hasOwnProperty("address") ? this.props.active_account.address.trim() : "")}}>{this.props.t("copy")}</Button> &nbsp;
               <Button variant="outline-info">{this.props.t("receive")}</Button>
             </ButtonToolbar>
           </Col>
         </Row>
-        <br/>
+        <br />
         <Row>
           <Col>
-            <Alert variant="secondary" style={{ "word-break": "break-all" }}> {this.props.active_account.hasOwnProperty("account") ? this.props.active_account.account.address : ""} </Alert>
+            <Alert variant="secondary" style={{ wordBreak: "break-all" }}> {this.props.active_account.hasOwnProperty("address") ? this.props.active_account.address : ""} </Alert>
           </Col>
         </Row>
       </div>
